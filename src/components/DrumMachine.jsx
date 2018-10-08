@@ -15,12 +15,13 @@ class DrumMachine extends React.Component {
     render() {
 
     const pads = this.state.padsList.map((pad) => {
-        return (<DrumPad name={pad.name} character={pad.character} audio_clip={pad.audio_clip} />)
+        return (<DrumPad key={pad.name} character={pad.character} audio_clip={pad.audio_clip} />)
     })
 
         return(
             <div className='drum-machine'>
-                {pads}
+                <Display name={this.state.padsList.name}/>
+                <div className='pads'>{pads}</div>
             </div>
         )
     }
