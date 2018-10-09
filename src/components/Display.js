@@ -23,7 +23,7 @@ const StyledDisplay = styled.div`
 const Display = (props) => (
     <StyledDisplay>
         <PowerSwitch switchPower={props.switchPower} powerOn={props.powerOn}/>
-        <BankSwitch />
+        <BankSwitch soundBankNumber={props.soundBankNumber} updateSoundBank={props.updateSoundBank}/>
         <SoundName name={props.name} powerOn={props.powerOn}/>
         <VolumeSlider />
     </StyledDisplay>

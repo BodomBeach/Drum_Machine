@@ -1,7 +1,7 @@
 import React from 'react'
 import Display from './Display'
 import DrumPad from './DrumPad'
-import {padsList} from '../drumBank'
+import { soundBanks } from '../drumBank'
 import styled from 'styled-components';
 
 const StyledDrumMachine = styled.div`
@@ -31,16 +31,18 @@ class DrumMachine extends React.Component {
 
         this.state = ({
             powerOn: true,
-            padsList: padsList,
+            soundBankNumber: 1,
             current_pad: 'Open-HH'
         })
 
         this.handlePadClick = this.handlePadClick.bind(this)
         this.playSound = this.playSound.bind(this)
         this.switchPower = this.switchPower.bind(this)
+        this.updateSoundBank = this.updateSoundBank.bind(this)
     }
 
     playSound(pad) {
+        console.log(pad)
         const sound = document.getElementById(pad.character)
         sound.play()
     }
@@ -63,15 +65,29 @@ class DrumMachine extends React.Component {
         }
     }
 
+    updateSoundBank() {
+        console.log('yay')
+        const nextBankNumber = this.state.soundBankNumber >= soundBanks.length ? 1 : this.state.soundBankNumber + 1
+        let newState = Object.assign({}, this.state, {soundBankNumber: nextBankNumber})
+        this.setState(newState)
+    }
+
     render() {
 
-    const pads = this.state.padsList.map((pad) => {
-        return (<DrumPad key={pad.character} pad={pad} handlePadClick={this.handlePadClick}/>)
-    })
+        let soundBank = soundBanks[this.state.soundBankNumber - 1]
+        const pads = soundBank.map((pad) => {
+
+            return (<DrumPad key={pad.character} pad={pad} handlePadClick={this.handlePadClick}/>)
+        })
+
 
         return(
             <StyledDrumMachine>
-                <Display name={this.state.current_pad} switchPower={this.switchPower} powerOn={this.state.powerOn}/>
+                <Display name={this.state.current_pad}
+                    powerOn={this.state.powerOn}
+                    switchPower={this.switchPower}
+                    soundBankNumber={this.state.soundBankNumber}
+                    updateSoundBank={this.updateSoundBank}/>
                 <StyledPads handleKeyPress={this.handleKeyPress}>{pads}</StyledPads>
             </StyledDrumMachine>
         )

@@ -13,7 +13,6 @@ const Character = styled.h2`
     margin: auto;
 `
 
-
 class DrumPad extends React.Component {
     constructor(props) {
         super(props)
@@ -30,14 +29,11 @@ class DrumPad extends React.Component {
     }
 
     handleKeyPress(e) {
-        console.log(this.props.pad.keycode)
-        if (e.keyCode === this.props.pad.keycode) {
+        if (e.keyCode === this.props.pad.character.charCodeAt(0)) {
             this.props.handlePadClick(this.props.pad)
         }
     }
-
     render() {
-
         return (
             <StyledDrumPad onMouseDown={() => this.props.handlePadClick(this.props.pad)}>
                 <audio src={this.props.pad.audio_clip} className='clip' id={this.props.pad.character}></audio>

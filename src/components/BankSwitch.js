@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { TextStyle } from './theme.js'
 import { SwitchStyle } from './theme.js'
+import { soundBanks } from '../drumBank'
 
 const Number = styled.div`
     width: 40px;
@@ -16,13 +17,14 @@ const Number = styled.div`
 `
 
 const BankSwitch = (props) => {
+
     return(
         <SwitchStyle>
-            <TextStyle>
+            <TextStyle >
                 <p>SOUND BANK</p>
             </TextStyle>
-            <Number>
-                <h3>1</h3>
+            <Number onClick={props.updateSoundBank}>
+                <h3>{props.soundBankNumber}</h3>
             </Number>
         </SwitchStyle>
     )
