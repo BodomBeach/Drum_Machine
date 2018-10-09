@@ -17,6 +17,23 @@ const Character = styled.h2`
 class DrumPad extends React.Component {
     constructor(props) {
         super(props)
+
+        this.handleKeyPress = this.handleKeyPress.bind(this)
+    }
+
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleKeyPress)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.handleKeyPress)
+    }
+
+    handleKeyPress(e) {
+        console.log(this.props.pad.keycode)
+        if (e.keyCode === this.props.pad.keycode) {
+            this.props.handlePadClick(this.props.pad)
+        }
     }
 
     render() {

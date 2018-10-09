@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const StyledSoundName = styled.div`
     color: white;
-    background-color: rgb(120, 110, 233);
+    background-color: ${props => props.powerOn ? '#6c61ec' : '#1c19ac'};
     height: 64px;
     margin: 30px 10px 0px 10px;
     border: 1px solid white;
@@ -11,7 +11,7 @@ const StyledSoundName = styled.div`
 `
 
 const SoundName = (props) => (
-    <StyledSoundName>
+    <StyledSoundName powerOn={props.powerOn}>
         <h3>{props.name}</h3>
     </StyledSoundName>
 )

@@ -11,7 +11,7 @@ const StyledDrumMachine = styled.div`
     margin-top: 200px;
     background-color: rgb(47, 41, 45);
     overflow: auto;
-    border-radius: 10%;
+    border-radius: 3%;
 `
 
 const StyledPads = styled.div`
@@ -46,14 +46,21 @@ class DrumMachine extends React.Component {
     }
 
     handlePadClick(pad) {
-        this.playSound(pad);
-        let newState = Object.assign({}, this.state, { current_pad: pad.name });
-        this.setState(newState)
+        if (this.state.powerOn) {
+            this.playSound(pad);
+            let newState = Object.assign({}, this.state, { current_pad: pad.name });
+            this.setState(newState)
+        }
     }
 
     switchPower() {
-        let newState = Object.assign({}, this.state, {powerOn: !this.state.powerOn})
-        this.setState(newState)
+        if (this.state.powerOn) {
+            let offState = Object.assign({}, this.state, {powerOn: false, current_pad: ''})
+            this.setState(offState)
+        } else {
+            let onState = Object.assign({}, this.state, {powerOn: true})
+            this.setState(onState)
+        }
     }
 
     render() {
@@ -65,7 +72,7 @@ class DrumMachine extends React.Component {
         return(
             <StyledDrumMachine>
                 <Display name={this.state.current_pad} switchPower={this.switchPower} powerOn={this.state.powerOn}/>
-                <StyledPads>{pads}</StyledPads>
+                <StyledPads handleKeyPress={this.handleKeyPress}>{pads}</StyledPads>
             </StyledDrumMachine>
         )
     }

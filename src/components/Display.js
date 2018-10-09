@@ -24,7 +24,7 @@ const Display = (props) => (
     <StyledDisplay>
         <PowerSwitch switchPower={props.switchPower} powerOn={props.powerOn}/>
         <BankSwitch />
-        <SoundName name={props.name} />
+        <SoundName name={props.name} powerOn={props.powerOn}/>
         <VolumeSlider />
     </StyledDisplay>
 )
