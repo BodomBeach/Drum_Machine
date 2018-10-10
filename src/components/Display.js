@@ -25,7 +25,7 @@ const Display = (props) => (
         <PowerSwitch switchPower={props.switchPower} powerOn={props.powerOn}/>
         <BankSwitch soundBankNumber={props.soundBankNumber} updateSoundBank={props.updateSoundBank}/>
         <SoundName name={props.name} powerOn={props.powerOn}/>
-        <VolumeSlider />
+        <VolumeSlider updateVolume={props.updateVolume}/>
     </StyledDisplay>
 )
 

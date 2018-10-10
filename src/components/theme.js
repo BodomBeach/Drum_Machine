@@ -12,5 +12,5 @@ export const SwitchStyle = styled.div`
     align-items: center;
     justify-content: flex-end;
     flex-direction: column;
-    padding-bottom: 10px;
+    padding-bottom: 18px;
 `

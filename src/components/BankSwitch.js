@@ -19,7 +19,7 @@ const Number = styled.div`
 const BankSwitch = (props) => {
 
     return(
-        <SwitchStyle>
+        <SwitchStyle style={{marginRight: '25px'}}>
             <TextStyle >
                 <p>SOUND BANK</p>
             </TextStyle>

@@ -18,7 +18,7 @@ class VolumeSlider extends React.Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
-      value: 10
+      value: 50
     }
   }
 
@@ -33,7 +33,7 @@ class VolumeSlider extends React.Component {
   };
 
   handleChangeComplete = () => {
-    console.log('Change event completed')
+    this.props.updateVolume(this.state.value)
   };
 
   render () {

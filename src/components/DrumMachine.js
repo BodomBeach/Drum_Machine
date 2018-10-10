@@ -32,18 +32,20 @@ class DrumMachine extends React.Component {
         this.state = ({
             powerOn: true,
             soundBankNumber: 1,
-            current_pad: 'Open-HH'
+            current_pad: 'Open-HH',
+            volume: 0.5
         })
 
         this.handlePadClick = this.handlePadClick.bind(this)
         this.playSound = this.playSound.bind(this)
         this.switchPower = this.switchPower.bind(this)
         this.updateSoundBank = this.updateSoundBank.bind(this)
+        this.updateVolume = this.updateVolume.bind(this)
     }
 
     playSound(pad) {
-        console.log(pad)
         const sound = document.getElementById(pad.character)
+        sound.volume = this.state.volume
         sound.play()
     }
 
@@ -57,18 +59,24 @@ class DrumMachine extends React.Component {
 
     switchPower() {
         if (this.state.powerOn) {
-            let offState = Object.assign({}, this.state, {powerOn: false, current_pad: ''})
+            let offState = Object.assign({}, this.state, { powerOn: false, current_pad: '' })
             this.setState(offState)
         } else {
-            let onState = Object.assign({}, this.state, {powerOn: true})
+            let onState = Object.assign({}, this.state, { powerOn: true })
             this.setState(onState)
         }
     }
 
     updateSoundBank() {
-        console.log('yay')
         const nextBankNumber = this.state.soundBankNumber >= soundBanks.length ? 1 : this.state.soundBankNumber + 1
-        let newState = Object.assign({}, this.state, {soundBankNumber: nextBankNumber})
+        let newState = Object.assign({}, this.state, { soundBankNumber: nextBankNumber })
+        this.setState(newState)
+    }
+
+    updateVolume(value) {
+        console.log(value)
+        let newState = Object.assign({}, this.state, { volume: value / 100 })
+        console.log(newState)
         this.setState(newState)
     }
 
@@ -87,7 +95,9 @@ class DrumMachine extends React.Component {
                     powerOn={this.state.powerOn}
                     switchPower={this.switchPower}
                     soundBankNumber={this.state.soundBankNumber}
-                    updateSoundBank={this.updateSoundBank}/>
+                    updateSoundBank={this.updateSoundBank}
+                    updateVolume={this.updateVolume}
+                />
                 <StyledPads handleKeyPress={this.handleKeyPress}>{pads}</StyledPads>
             </StyledDrumMachine>
         )
